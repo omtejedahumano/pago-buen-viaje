@@ -4,13 +4,15 @@ Cliente de referencia para integración con el API de pagos de Buen Viaje.
 
 ## Inicio Rápido
 ```bash
-# 1. Instalar dependencias
+# 1. Navegar a src folder
+cd src
+# 2. Instalar dependencias
 npm install
 
-# 2. Configurar credenciales (ver sección Configuración)
+# 3. Configurar credenciales (ver sección Configuración)
 cp .env.example .env
 
-# 3. Ejecutar
+# 4. Ejecutar
 npm start
 ```
 
