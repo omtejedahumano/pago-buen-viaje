@@ -40,50 +40,50 @@ Los datos de tarjetas de crédito son **extremadamente sensibles** y están suje
 │  (Tu App)    │                                    │ (Buen Viaje) │
 └──────┬───────┘                                    └──────┬───────┘
        │                                                   │
-       │ 1. GET /crypto/publickey/{kid}                   │
+       │ 1. GET /crypto/publickey/{kid}                    │
        │ ─────────────────────────────────────────────────>│
        │                                                   │
-       │ 2. ← Clave pública RSA 3072 bits                 │
+       │ 2. ← Clave pública RSA 3072 bits                  │
        │<──────────────────────────────────────────────────│
        │                                                   │
-       │ 3. Cifra datos de tarjeta                        │
-       │    usando JWE (RSA-OAEP-256 + A256GCM)          │
-       │    ┌──────────────────────────────┐             │
-       │    │ NumeroTarjeta                │             │
-       │    │ FechaExpiracionTarjeta       │             │
-       │    │ CVV                          │             │
-       │    └──────────────────────────────┘             │
-       │              ↓                                   │
-       │    ┌──────────────────────────────┐             │
-       │    │ JWE (cifrado)                │             │
-       │    └──────────────────────────────┘             │
+       │ 3. Cifra datos de tarjeta                         │
+       │    usando JWE (RSA-OAEP-256 + A256GCM)            │
+       │    ┌──────────────────────────────┐               │
+       │    │ NumeroTarjeta                │               │
+       │    │ FechaExpiracionTarjeta       │               │
+       │    │ CVV                          │               │
+       │    └──────────────────────────────┘               │
+       │              ↓                                    │
+       │    ┌──────────────────────────────┐               │
+       │    │ JWE (cifrado)                │               │
+       │    └──────────────────────────────┘               │
        │                                                   │
-       │ 4. Firma el JWE con tu clave privada            │
-       │    usando JWS (RS256)                            │
-       │              ↓                                   │
-       │    ┌──────────────────────────────┐             │
-       │    │ JWS (firma digital)          │             │
-       │    └──────────────────────────────┘             │
+       │ 4. Firma el JWE con tu clave privada              │
+       │    usando JWS (RS256)                             │
+       │              ↓                                    │
+       │    ┌──────────────────────────────┐               │
+       │    │ JWS (firma digital)          │               │
+       │    └──────────────────────────────┘               │
        │                                                   │
-       │ 5. POST /pagos                                   │
-       │    Body: { numeroFactura, monto,                │
-       │             metodoPago: {                        │
-       │               datosTarjetaCifrados: {           │
-       │                 jwe: "...",                      │
-       │                 firmaJws: "...",                 │
-       │                 nonce: "uuid",                   │
-       │                 timestamp: "..."                 │
-       │               }                                  │
-       │             }                                    │
-       │           }                                      │
+       │ 5. POST /pagos                                    │
+       │    Body: { numeroFactura, monto,                  │
+       │             metodoPago: {                         │
+       │               datosTarjetaCifrados: {             │
+       │                 jwe: "...",                       │
+       │                 firmaJws: "...",                  │
+       │                 nonce: "uuid",                    │
+       │                 timestamp: "..."                  │
+       │               }                                   │
+       │             }                                     │
+       │           }                                       │
        │ ─────────────────────────────────────────────────>│
        │                                                   │
-       │                              6. Valida firma JWS │
-       │                              7. Valida nonce     │
-       │                              8. Desencripta JWE  │
-       │                              9. Procesa pago     │
+       │                              6. Valida firma JWS  │
+       │                              7. Valida nonce      │
+       │                              8. Desencripta JWE   │
+       │                              9. Procesa pago      │
        │                                                   │
-       │ 10. ← 201 Created { resultado del pago }         │
+       │ 10. ← 201 Created { resultado del pago }          │
        │<──────────────────────────────────────────────────│
        │                                                   │
 ```
