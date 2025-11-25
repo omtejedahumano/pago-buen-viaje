@@ -63,10 +63,10 @@ const CONFIG = {
 
   // Datos de prueba de pago
   pago: {
-    numeroFactura: '4666851',
-    monto: 45.00,
+    numeroFactura: '4670066',
+    monto: 2878.65,
     impuesto: 0.00,
-    moneda: 'USD'
+    moneda: 'DOP'
   },
 
   // Tarjeta de prueba (Visa test card - NO usar en producción)
@@ -281,7 +281,7 @@ async function enviarPago(payload) {
   
   console.log(`   → Endpoint: ${endpoint}`);
   console.log(`   → Factura: ${payload.numeroFactura}`);
-  console.log(`   → Monto: ${payload.moneda} ${payload.monto.toFixed(2)}`);
+  console.log(`   → Monto: ${payload.monto.toFixed(2)}`);
   console.log(`   → Impuesto: ${payload.moneda} ${payload.impuesto.toFixed(2)}`);
 
   const response = await fetch(endpoint, {
@@ -407,7 +407,6 @@ function mostrarRespuesta(response, responseText) {
   console.log('═'.repeat(70));
   console.log('  RESPUESTA DEL SERVIDOR');
   console.log('═'.repeat(70));
-  console.log(`Status: ${response.status} ${response.statusText}`);
   console.log(`Content-Type: ${response.headers.get('content-type')}`);
   console.log('─'.repeat(70));
 
